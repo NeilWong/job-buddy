@@ -1,0 +1,15 @@
+{
+    "name": "Job Buddy",
+    "version": "1.0",
+    "description": "Save job listing details to a spreadsheet when you click apply!",
+    "background_page": "background.html",
+    "browser_action": {
+      "name": "Manipulate DOM",
+      "icons": ["icon.png"],
+      "default_icon": "icon.png"
+    },
+    "content_scripts": [ {
+      "js": [ "jquery.min.js", "background.js" ],
+      "matches": [ "http://*/*", "https://*/*"]
+    }]
+}
