@@ -22,9 +22,9 @@ $(document).on({
         // $this.css('background-color', $this.data('bgcolor'));
         $this.html("Apply");
     }
-}, "button.jobs-save-button");
+}, "button.jobs-apply-button");
 
-$(document).on("click", "button.jobs-save-button", function() {
+$(document).on("click", "button.jobs-apply-button", function() {
     // get job info
     const $jobTitle = $("h1:regex(class, jobs(-details)?-top-card__job-title)")
     const $companyName = $("a:regex(class, jobs(-details)?-top-card__company-url)")
@@ -48,7 +48,7 @@ $(document).on("click", "button.jobs-save-button", function() {
     }
 
     chrome.storage.sync.get({jobs: []}, function(data) {
-       update(data.jobs, job);
+        update(data.jobs, job);
     });  
     
     alert("The relevant information about this job listing was saved in your spreadsheet!")

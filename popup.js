@@ -9,7 +9,7 @@ $(document).ready(function() {
     
   } else if (document.location.pathname.match(/[^\/]+$/)[0] == 'savedJobs.html') {
 
-    chrome.storage.sync.get(['jobs'], function(data) {
+    chrome.storage.sync.get({jobs: []}, function(data) {
       for (var i = 0; i < data.jobs.length; i++) {
         var job = data.jobs[i];
         var notes = ""
