@@ -12,10 +12,9 @@ $(document).ready(function() {
     chrome.storage.local.get({jobs: []}, function(data) {
       for (var i = 0; i < data.jobs.length; i++) {
         var job = data.jobs[i];
-        // var notes = ""
-        // if (!isNaN(job.notes)) {
-        //   notes = job.notes
-        // }
+
+        const modalId = "modal" + job.lastId
+        const closeId = "close" + job.lastId
 
         $("#jobs-table").append($(
           `
@@ -25,11 +24,22 @@ $(document).ready(function() {
             <td>` + job.companyLocation + `</td>
             <td>` + job.status + `</td>
             <td>` + job.dateApplied + `</td>
+            <td><button class=` + "modal-description" + `>Show</button></td>
             <td><button class=` + "remove-job" +`> <img class='delete-btn' src='delete.png'> </button></td>
           </tr>
           `
         ))
-
+        $("#modals").append($(
+        `
+        <div id='` + modalId  +`' class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span id='` + closeId  +`' class="close">&times;</span>
+            <p>`+ job.jobDescription +`</p>
+          </div>
+        </div>
+        `
+        ))
       }
     })
 
@@ -56,24 +66,36 @@ $(document).on("click", "#clear-all-jobs", function() {
 })
 
 function removeJob(array, jobId) {
-
-    for (var i = 0; i < array.length; i++) {
-      console.log(array[i].lastId);
-      console.log(jobId);
-      console.log("");
-      if (array[i].lastId == jobId) {
-
-        console.log("before splice", array);
-        array.splice(i,1);
-        console.log("after splice", array);
-      }
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].lastId == jobId) {
+      array.splice(i,1);
     }
+  }
 
-    chrome.storage.local.set({
-        jobs: array
-    }, function() {
-        chrome.storage.local.get(['jobs'], function(data) {
-            //console.log(data.jobs);
-        })
-    });
+  chrome.storage.local.set({
+    jobs: array
+  }, function() {
+      chrome.storage.local.get(['jobs'], function(data) {
+    })
+  });
+}
+
+$(document).on("click", ".modal-description", function(){
+  var $this = $(this);
+  var id = ($this.parent().parent().attr('id'));
+  displayDescriptionModal(id)
+})
+
+function displayDescriptionModal(obId) {
+  var modal = document.getElementById("modal" + jobId)
+  var span = document.getElementsById("close" + jobId)
+  modal.style.display = "block";
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 }
