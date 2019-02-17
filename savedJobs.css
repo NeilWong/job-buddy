@@ -12,9 +12,13 @@
     height: auto;
 }
 
-#clear-all-jobs {
+#clear-all-jobs, .remove-job {
     border: none;
     background: none;
     color: #c11411;
     outline: none;
+}
+
+tbody {
+    cursor: pointer;
 }

@@ -25,7 +25,7 @@ $(document).ready(function() {
             <td>` + job.companyLocation + `</td>
             <td>` + job.status + `</td>
             <td>` + job.dateApplied + `</td>
-            <td><button class=` + "remove-job" +`> remove </button></td>
+            <td><button class=` + "remove-job" +`> ✕ </button></td>
           </tr>
           `
         ))
@@ -45,6 +45,7 @@ $(document).on("click", ".remove-job", function(){
   var id = ($this.parent().parent().attr('id'));
   chrome.storage.local.get({jobs: []}, function(data) {
       removeJob(data.jobs, id);
+      window.location.reload()
   });
 })
 
