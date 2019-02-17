@@ -35,7 +35,7 @@ $(document).ready(function() {
           <!-- Modal content -->
           <div class="modal-content">
             <span id='` + closeId  +`' class="close">&times;</span>
-            <p>`+ job.jobDescription +`</p>
+            <div>`+ job.jobDescription +`</div>
           </div>
         </div>
         `
