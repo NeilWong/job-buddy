@@ -12,10 +12,10 @@ $(document).ready(function() {
     chrome.storage.local.get({jobs: []}, function(data) {
       for (var i = 0; i < data.jobs.length; i++) {
         var job = data.jobs[i];
-        var notes = ""
-        if (!isNaN(job.notes)) {
-          notes = job.notes
-        }
+        // var notes = ""
+        // if (!isNaN(job.notes)) {
+        //   notes = job.notes
+        // }
 
         $("#jobs-table").append($(
           `
@@ -25,7 +25,6 @@ $(document).ready(function() {
             <td>` + job.companyLocation + `</td>
             <td>` + job.status + `</td>
             <td>` + job.dateApplied + `</td>
-            <td>` + notes + `</td>
             <td><button class=` + "remove-job" +`> remove </button></td>
           </tr>
           `
