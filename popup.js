@@ -19,14 +19,14 @@ $(document).ready(function() {
 
         $("#jobs-table").append($(
           `
-          <tr id=` + job.id + `>
+          <tr id=` + job.lastId + `>
             <td>` + job.companyName + `</td>
             <td>` + job.jobTitle + `</td>
             <td>` + job.companyLocation + `</td>
             <td>` + job.status + `</td>
             <td>` + job.dateApplied + `</td>
             <td>` + notes + `</td>
-            <td><button id=` + job.id+ ` class=` + "remove-job" +`> remove </button></td>
+            <td><button class=` + "remove-job" +`> remove </button></td>
           </tr>
           `
         ))
@@ -42,10 +42,10 @@ $(document).ready(function() {
 
 $(document).on("click", ".remove-job", function(){
   var $this = $(this);
-  var id = ($this.parent().attr('id'));
-  alert($this.parent().attr('id'));
-  chrome.storage.local.remove(id, function() {
-    alert("Removed the job!");
+  console.log($this);
+  var id = ($this.parent().parent().attr('id'));
+  chrome.storage.sync.get({jobs: []}, function(data) {
+      removeJob(data.jobs, id);
   });
 })
 
@@ -54,3 +54,26 @@ $(document).on("click", "#clear-all-jobs", function() {
   chrome.storage.sync.clear()
   window.location.reload()
 })
+
+function removeJob(array, jobId) {
+
+    for (var i = 0; i < array.length; i++) {
+      console.log(array[i].lastId);
+      console.log(jobId);
+      console.log("");
+      if (array[i].lastId == jobId) {
+
+        console.log("before splice", array);
+        array.splice(i,1);
+        console.log("after splice", array);
+      }
+    }
+
+    chrome.storage.sync.set({
+        jobs: array
+    }, function() {
+        chrome.storage.sync.get(['jobs'], function(data) {
+            //console.log(data.jobs);
+        })
+    });
+}
