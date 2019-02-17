@@ -35,3 +35,8 @@ $(document).ready(function() {
 
   }
 })
+
+$(document).on("click", "#clear-all-jobs", function() {
+  chrome.storage.sync.clear()
+  window.location.reload()
+})
