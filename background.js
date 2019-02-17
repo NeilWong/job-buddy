@@ -39,12 +39,27 @@ $(document).on("click", "button.jobs-save-button", function() {
     companyLocation = $companyLocation.text().trim()
     jobDescription = $jobDescription.text().trim()
 
-    console.log( {
-        companyName,
-        jobTitle,
-        companyLocation,
-        jobDescription
-    })
+    const job = {
+        "jobTitle": jobTitle,
+        "companyName": companyName,
+        "companyLocation": companyLocation,
+        "jobDescription": jobDescription
+    }
+
+    chrome.storage.sync.get({jobs: []}, function(data) {
+       update(data.jobs, job);
+    });  
     
     alert("The relevant information about this job listing was saved in your spreadsheet!")
 });
+
+function update(array, job) {
+    array.push(job);
+    chrome.storage.sync.set({
+        jobs: array
+    }, function() {
+        chrome.storage.sync.get(['jobs'], function(data) {
+            console.log(data.jobs);
+        })
+    });
+}
