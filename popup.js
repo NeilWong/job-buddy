@@ -32,8 +32,9 @@ $(document).ready(function() {
         `
         <div id='` + modalId  +`' class="modal">
           <!-- Modal content -->
-          <div class="modal-content">
-            <span id='` + closeId  +`' class="close">&times;</span>
+          <div style="overflow:auto; height:100%; width:100%"class="modal-content p-5">
+            <span style="position:absolute" id='` + closeId  +`' class="close">&times;</span>
+            <h1> Job Description </h1>
             <div>`+ job.jobDescription +`</div>
           </div>
         </div>
