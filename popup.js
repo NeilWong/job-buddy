@@ -24,12 +24,12 @@ $(document).ready(function() {
             <td>` + job.companyLocation + `</td>
             <td>` + job.status + `</td>
             <td>` + job.dateApplied + `</td>
-            <td><button class=` + "modal-description" + `>Show</button></td>
+            <td><button class=` + "modal-description" + `>Show Description</button></td>
             <td><button class=` + "remove-job" +`> <img class='delete-btn' src='delete.png'> </button></td>
           </tr>
           `
         ))
-        $("#modals").append($(
+        $(".modals").append($(
         `
         <div id='` + modalId  +`' class="modal">
           <!-- Modal content -->
@@ -86,16 +86,12 @@ $(document).on("click", ".modal-description", function(){
   displayDescriptionModal(id)
 })
 
-function displayDescriptionModal(obId) {
-  var modal = document.getElementById("modal" + jobId)
-  var span = document.getElementsById("close" + jobId)
-  modal.style.display = "block";
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
+function displayDescriptionModal(jobId) {
+  console.log(jobId)
+  var $modal = $("#modal"+jobId)
+  var $span = $("#close"+jobId)
+  $modal.css('display', 'block');
+  $(document).on("click", "#close"+jobId, function() {
+    $modal.css('display', 'none')
+  })
 }
