@@ -12,6 +12,13 @@
     height: auto;
 }
 
+.brand-area h1 {
+    margin-top: 10px;
+    color: #505050;
+    font-size: 52px;
+    font-weight: bold;
+}
+
 #clear-all-jobs, .remove-job {
     border: none;
     background: none;
