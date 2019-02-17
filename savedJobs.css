@@ -1,4 +1,13 @@
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
+* {
+    font-family: 'Inconsolata', monospace;
+}
+
+.brand-area {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.brand-area img {
+    width: 120px;
+    height: auto;
 }
