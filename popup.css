@@ -1,15 +1,40 @@
-.button-container {
-  text-align: center;
+body {
+  /* padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 30px;
+  padding-bottom: 30px; */
+  width: 320px;
+  height: 140px;
 }
 
-.container {
-  width: 250px;
-  text-align: center;
-}
-.checkboxes {
-  text-align: left;
+.popup-page-icon {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 110px;
+  height: auto;
 }
 
-.header {
+.popup-page-title {
+  position: absolute;
+  top: 34px;
+  right: 24px;
+  color: #505050;
+  font-size: 34px;
   font-weight: bold;
+  font-family: 'Inconsolata', monospace;
+}
+
+.popup-page-applications {
+  position: absolute;
+  right: 15px;
+  top: 81px;
+  width: 170px;
+  background-color: #3C9963;
+  color: white;
+}
+
+.popup-page-applications:hover {
+  background-color: #368959;
+  color: white;
 }

@@ -30,12 +30,12 @@ $(document).on("click", "button.jobs-save-button", function() {
     if ($companyLocation.text() === ""){
         $companyLocation = $("span:regex(class, jobs(-details)?-top-card__bullet)").first()
     }
-    const $jobDescription = $("div.jobs-description-content__text")
+    const $jobDescription = $("div.jobs-description-content__text > span")
 
     jobTitle = $jobTitle.text().trim()
     companyName = $companyName.text().trim()
     companyLocation = $companyLocation.text().trim()
-    jobDescription = $jobDescription.text().trim()
+    jobDescription = $jobDescription.html().trim()
 
     let job = {};
 
