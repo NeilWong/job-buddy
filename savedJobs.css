@@ -11,3 +11,10 @@
     width: 120px;
     height: auto;
 }
+
+#clear-all-jobs {
+    border: none;
+    background: none;
+    color: #c11411;
+    outline: none;
+}

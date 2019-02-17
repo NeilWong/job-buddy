@@ -41,7 +41,7 @@ $(document).on("click", "button.jobs-apply-button", function() {
 
     let job = {};
 
-    chrome.storage.sync.get({lastId: 0}, function(data){
+    chrome.storage.local.get({lastId: 0}, function(data){
         job = {
             lastId: data.lastId,
             jobTitle,
@@ -51,24 +51,22 @@ $(document).on("click", "button.jobs-apply-button", function() {
             "dateApplied": Date(Date.now()),
             jobDescription,
         }
-        chrome.storage.sync.set({
+        chrome.storage.local.set({
             lastId: data.lastId + 1
         })
     })
 
-    chrome.storage.sync.get({jobs: []}, function(data) {
+    chrome.storage.local.get({jobs: []}, function(data) {
         update(data.jobs, job);
     });  
-    
-    alert("The relevant information about this job listing was saved in your spreadsheet!")
 });
 
 function update(array, job) {
     array.push(job);
-    chrome.storage.sync.set({
+    chrome.storage.local.set({
         jobs: array
     }, function() {
-        chrome.storage.sync.get(['jobs'], function(data) {
+        chrome.storage.local.get(['jobs'], function(data) {
             console.log(data.jobs);
         })
     });

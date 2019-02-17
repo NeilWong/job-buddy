@@ -9,7 +9,7 @@ $(document).ready(function() {
 
   } else if (document.location.pathname.match(/[^\/]+$/)[0] == 'savedJobs.html') {
 
-    chrome.storage.sync.get({jobs: []}, function(data) {
+    chrome.storage.local.get({jobs: []}, function(data) {
       for (var i = 0; i < data.jobs.length; i++) {
         var job = data.jobs[i];
         var notes = ""
@@ -44,14 +44,14 @@ $(document).on("click", ".remove-job", function(){
   var $this = $(this);
   console.log($this);
   var id = ($this.parent().parent().attr('id'));
-  chrome.storage.sync.get({jobs: []}, function(data) {
+  chrome.storage.local.get({jobs: []}, function(data) {
       removeJob(data.jobs, id);
   });
 })
 
 
 $(document).on("click", "#clear-all-jobs", function() {
-  chrome.storage.sync.clear()
+  chrome.storage.local.clear()
   window.location.reload()
 })
 
@@ -69,10 +69,10 @@ function removeJob(array, jobId) {
       }
     }
 
-    chrome.storage.sync.set({
+    chrome.storage.local.set({
         jobs: array
     }, function() {
-        chrome.storage.sync.get(['jobs'], function(data) {
+        chrome.storage.local.get(['jobs'], function(data) {
             //console.log(data.jobs);
         })
     });
