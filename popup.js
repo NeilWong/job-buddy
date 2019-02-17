@@ -37,6 +37,7 @@ $(document).ready(function() {
     // deletion listener function
 
   }
+
 })
 
 $(document).on("click", ".remove-job", function(){
@@ -46,4 +47,10 @@ $(document).on("click", ".remove-job", function(){
   chrome.storage.local.remove(id, function() {
     alert("Removed the job!");
   });
+})
+
+
+$(document).on("click", "#clear-all-jobs", function() {
+  chrome.storage.sync.clear()
+  window.location.reload()
 })
