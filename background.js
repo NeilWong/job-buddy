@@ -14,15 +14,13 @@ jQuery.expr[':'].regex = function(elem, index, match) {
 $(document).on({
     mouseenter: function () {
         var $this = $(this);
-        // $this.data('bgcolor', $this.css('background-color')).css('background-color', '#ff0000');
-        $this.html("<img style='height:20px;width:auto;' src='" + chrome.extension.getURL('icon-full.png') + "'>" + "&nbsp;&nbsp;" + "Save with Job Buddy");
+        $this.html("<img style='height:20px;width:auto;' src='" + chrome.extension.getURL('icon-full.png') + "'>" + "&nbsp;&nbsp;" + "Save");
     },
     mouseleave: function () {
         var $this = $(this);
-        // $this.css('background-color', $this.data('bgcolor'));
         $this.html("Save");
     }
-}, "button.artdeco-button");
+}, "button.jobs-save-button > button.artdeco-button");
 
 $(document).on("click", "button.jobs-save-button", function() {
     // get job info
@@ -64,12 +62,12 @@ $(document).on("click", "button.jobs-save-button", function() {
 $(document).on({
     mouseenter: function () {
         var $this = $(this);
-        // $this.data('bgcolor', $this.css('background-color')).css('background-color', '#ff0000');
+        $this.data('bgcolor', $this.css('background-color')).css('background-color', '#3c9963');
         $this.html("<img style='height:20px;width:auto;' src='" + chrome.extension.getURL('icon-full.png') + "'>" + "&nbsp;&nbsp;" + "Apply");
     },
     mouseleave: function () {
         var $this = $(this);
-        // $this.css('background-color', $this.data('bgcolor'));
+        $this.css('background-color', $this.data('bgcolor'));
         $this.html("Apply");
     }
 }, "button.jobs-apply-button");
