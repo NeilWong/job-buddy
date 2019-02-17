@@ -15,6 +15,56 @@ $(document).on({
     mouseenter: function () {
         var $this = $(this);
         // $this.data('bgcolor', $this.css('background-color')).css('background-color', '#ff0000');
+        $this.html("<img style='height:20px;width:auto;' src='" + chrome.extension.getURL('icon-full.png') + "'>" + "&nbsp;&nbsp;" + "Save with Job Buddy");
+    },
+    mouseleave: function () {
+        var $this = $(this);
+        // $this.css('background-color', $this.data('bgcolor'));
+        $this.html("Save");
+    }
+}, "button.artdeco-button");
+
+$(document).on("click", "button.jobs-save-button", function() {
+    // get job info
+    const $jobTitle = $("h1:regex(class, jobs(-details)?-top-card__job-title)")
+    const $companyName = $("a:regex(class, jobs(-details)?-top-card__company-url)")
+    let $companyLocation = $("a:regex(class, jobs(-details)?-top-card__exact-location)")
+    if ($companyLocation.text() === ""){
+        $companyLocation = $("span:regex(class, jobs(-details)?-top-card__bullet)").first()
+    }
+    const $jobDescription = $("div.jobs-description-content__text")
+
+    jobTitle = $jobTitle.text().trim()
+    companyName = $companyName.text().trim()
+    companyLocation = $companyLocation.text().trim()
+    jobDescription = $jobDescription.text().trim()
+
+    let job = {};
+
+    chrome.storage.local.get({lastId: 0}, function(data){
+        job = {
+            lastId: data.lastId,
+            jobTitle,
+            companyName,
+            companyLocation,
+            "status": "Saved",
+            "dateApplied": new Date(Date.now()).toDateString(),
+            jobDescription,
+        }
+        chrome.storage.local.set({
+            lastId: data.lastId + 1
+        })
+    })
+
+    chrome.storage.local.get({jobs: []}, function(data) {
+        update(data.jobs, job);
+    });  
+});
+
+$(document).on({
+    mouseenter: function () {
+        var $this = $(this);
+        // $this.data('bgcolor', $this.css('background-color')).css('background-color', '#ff0000');
         $this.html("<img style='height:20px;width:auto;' src='" + chrome.extension.getURL('icon-full.png') + "'>" + "&nbsp;&nbsp;" + "Apply");
     },
     mouseleave: function () {
