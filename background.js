@@ -43,7 +43,8 @@ $(document).on("click", "button.jobs-save-button", function() {
         "jobTitle": jobTitle,
         "companyName": companyName,
         "companyLocation": companyLocation,
-        "jobDescription": jobDescription
+        "status": "Applied",
+        "jobDescription": jobDescription,
     }
 
     chrome.storage.sync.get({jobs: []}, function(data) {
