@@ -39,13 +39,22 @@ $(document).on("click", "button.jobs-apply-button", function() {
     companyLocation = $companyLocation.text().trim()
     jobDescription = $jobDescription.text().trim()
 
-    const job = {
-        "jobTitle": jobTitle,
-        "companyName": companyName,
-        "companyLocation": companyLocation,
-        "status": "Applied",
-        "jobDescription": jobDescription,
-    }
+    let job = {};
+
+    chrome.storage.sync.get({lastId: 0}, function(data){
+        job = {
+            lastId: data.lastId,
+            jobTitle,
+            companyName,
+            companyLocation,
+            "status": "Applied",
+            "dateApplied": Date(Date.now()),
+            jobDescription,
+        }
+        chrome.storage.sync.set({
+            lastId: data.lastId + 1
+        })
+    })
 
     chrome.storage.sync.get({jobs: []}, function(data) {
         update(data.jobs, job);

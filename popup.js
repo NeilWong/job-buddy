@@ -6,7 +6,7 @@ $(document).ready(function() {
   if (document.location.pathname.match(/[^\/]+$/)[0] == 'popup.html') {
 
     // load settings
-    
+
   } else if (document.location.pathname.match(/[^\/]+$/)[0] == 'savedJobs.html') {
 
     chrome.storage.sync.get({jobs: []}, function(data) {
@@ -19,19 +19,38 @@ $(document).ready(function() {
 
         $("#jobs-table").append($(
           `
-          <tr>
+          <tr id=` + job.id + `>
             <td>` + job.companyName + `</td>
             <td>` + job.jobTitle + `</td>
             <td>` + job.companyLocation + `</td>
             <td>` + job.status + `</td>
             <td>` + job.dateApplied + `</td>
             <td>` + notes + `</td>
-          </tr>  
+            <td><button id=` + job.id+ ` class=` + "remove-job" +`> remove </button></td>
+          </tr>
           `
         ))
 
-      }  
+      }
     })
 
+    // deletion listener function
+
   }
+
+})
+
+$(document).on("click", ".remove-job", function(){
+  var $this = $(this);
+  var id = ($this.parent().attr('id'));
+  alert($this.parent().attr('id'));
+  chrome.storage.local.remove(id, function() {
+    alert("Removed the job!");
+  });
+})
+
+
+$(document).on("click", "#clear-all-jobs", function() {
+  chrome.storage.sync.clear()
+  window.location.reload()
 })
