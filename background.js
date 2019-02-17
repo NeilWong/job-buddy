@@ -48,7 +48,7 @@ $(document).on("click", "button.jobs-apply-button", function() {
             companyName,
             companyLocation,
             "status": "Applied",
-            "dateApplied": Date(Date.now()),
+            "dateApplied": new Date(Date.now()).toDateString(),
             jobDescription,
         }
         chrome.storage.local.set({
