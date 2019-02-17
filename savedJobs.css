@@ -29,3 +29,8 @@
 tbody {
     cursor: pointer;
 }
+
+.delete-btn {
+    width: 30px;
+    height: auto;
+}

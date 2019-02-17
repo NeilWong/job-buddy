@@ -25,7 +25,7 @@ $(document).ready(function() {
             <td>` + job.companyLocation + `</td>
             <td>` + job.status + `</td>
             <td>` + job.dateApplied + `</td>
-            <td><button class=` + "remove-job" +`> ✕ </button></td>
+            <td><button class=` + "remove-job" +`> <img class='delete-btn' src='delete.png'> </button></td>
           </tr>
           `
         ))
