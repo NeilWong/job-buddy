@@ -1,8 +1,7 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/NeilWong/hackuci-2019/master/icon-full.png" alt="Job Buddy" title="Job Buddy" width="180"/>
+<img src="https://raw.githubusercontent.com/NeilWong/hackuci-2019/master/jobbuddy.png" alt="Job Buddy" title="Job Buddy" width="440"/>
 </p>
 
-# Job Buddy
 Hack UCI 2019 chrome exntesion that automatically saves details about jobs you apply to for future reference.
 
 
