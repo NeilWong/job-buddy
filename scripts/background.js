@@ -154,17 +154,18 @@ $(document).on("click", "button.jobs-apply-button", function() {
     jobDescription = $jobDescription.html().trim()
 
     let job = {};
+    job = {
+        jobTitle,
+        companyName,
+        companyLocation,
+        status: "Applied",
+        dateApplied: new Date(Date.now()).toDateString(),
+        jobDescription,
+    }
 
     chrome.storage.local.get({lastId: 0}, function(data){
-        job = {
-            lastId: data.lastId,
-            jobTitle,
-            companyName,
-            companyLocation,
-            "status": "Applied",
-            "dateApplied": new Date(Date.now()).toDateString(),
-            jobDescription,
-        }
+        job['lastId'] = data.lastId
+
         chrome.storage.local.set({
             lastId: data.lastId + 1
         })
