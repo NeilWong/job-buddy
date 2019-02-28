@@ -8,6 +8,58 @@ var config = {
   };
 firebase.initializeApp(config);
 var database = firebase.database();
+const COMPANIES_URL = 'https://job-buddy-1.firebaseio.com/companies'
+const JOBS_URL = 'https://job-buddy-1.firebaseio.com/jobs'
+
+function googleSignIn() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // ...
+      }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      });
+}
+
+function addNewJob(job) {
+    var companyId = job.companyName.replace(/\s+/g, '').toLowerCase(); // get the companyId
+    var newJobId = database.ref().child('jobs').push().key; // generate a new jobId
+
+    //need to add in check to see if company already exists
+
+    var newJob = {
+        companyId,
+        website: 'linkedIn',
+        title: job.title,
+        location: job.location,
+        // url
+        dateCreated: job.dateApplied, // change to dateCreated
+        lastUpdated: job.dateApplied, // change to lastUpdated
+        status: job.status,
+        // description
+    }
+
+    var newCompany = {
+        name: job.companyName,
+    }
+
+    var updates = {};
+    updates['/jobs/' + newJobId] = newJob
+    updates['/companies/' + companyId] = newCompany
+
+    return database.ref().update(updates)
+}
 
 jQuery.expr[':'].regex = function(elem, index, match) {
     var matchParams = match[3].split(','),
@@ -43,9 +95,9 @@ $(document).on("click", "button.jobs-save-button", function() {
     }
     const $jobDescription = $("div.jobs-description-content__text > span")
 
-    jobTitle = $jobTitle.text().trim()
+    title = $jobTitle.text().trim()
     companyName = $companyName.text().trim()
-    companyLocation = $companyLocation.text().trim()
+    location = $companyLocation.text().trim()
     jobDescription = $jobDescription.html().trim()
 
     let job = {};
