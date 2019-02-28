@@ -1,0 +1,19 @@
+database {
+    companies {
+        id {
+            name: string,
+        }
+    },
+    jobs {
+        id: {
+            companyId: string,
+            website: 'linkedIn' | 'handshake' | ...,
+            title: string,
+            location: string,
+            url: string,
+            dateCreated: Date,
+            lastUpdated: Date,
+            status: Applied | Saved | ...,
+        }
+    }
+}
