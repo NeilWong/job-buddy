@@ -14,7 +14,7 @@ jQuery.expr[':'].regex = function(elem, index, match) {
 $(document).on({
     mouseenter: function () {
         var $this = $(this);
-        $this.html("<img style='height:20px;width:auto;' src='" + chrome.extension.getURL('icon-full.png') + "'>" + "&nbsp;&nbsp;" + "Save");
+        $this.html("<img style='height:20px;width:auto;' src='" + chrome.extension.getURL('./images/icon-full.png') + "'>" + "&nbsp;&nbsp;" + "Save");
     },
     mouseleave: function () {
         var $this = $(this);
@@ -63,7 +63,7 @@ $(document).on({
     mouseenter: function () {
         var $this = $(this);
         $this.data('bgcolor', $this.css('background-color')).css('background-color', '#3c9963');
-        $this.html("<img style='height:20px;width:auto;' src='" + chrome.extension.getURL('icon-full.png') + "'>" + "&nbsp;&nbsp;" + "Apply");
+        $this.html("<img style='height:20px;width:auto;' src='" + chrome.extension.getURL('./images/icon-full.png') + "'>" + "&nbsp;&nbsp;" + "Apply");
     },
     mouseleave: function () {
         var $this = $(this);
