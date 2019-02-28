@@ -17,6 +17,6 @@
       "js": [ "jquery.min.js", "background.js" ],
       "matches": [ "http://*/*", "https://*/*"]
     }],
-    "web_accessible_resources": ["./images/icon.png", "./images/icon-full.png"],
+    "web_accessible_resources": ["images/icon.png", "images/icon-full.png"],
     "permissions": ["storage"]
 }
