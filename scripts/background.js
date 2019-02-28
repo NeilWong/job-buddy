@@ -8,6 +8,7 @@ var config = {
   };
 firebase.initializeApp(config);
 var database = firebase.database();
+
 const COMPANIES_URL = 'https://job-buddy-1.firebaseio.com/companies'
 const JOBS_URL = 'https://job-buddy-1.firebaseio.com/jobs'
 
@@ -41,8 +42,8 @@ function addNewJob(job) {
     var newJob = {
         companyId,
         website: 'linkedIn',
-        title: job.title,
-        location: job.location,
+        title: job.jobTitle,
+        location: job.companyLocation,
         // url
         dateCreated: job.dateApplied, // change to dateCreated
         lastUpdated: job.dateApplied, // change to lastUpdated
@@ -95,23 +96,25 @@ $(document).on("click", "button.jobs-save-button", function() {
     }
     const $jobDescription = $("div.jobs-description-content__text > span")
 
-    title = $jobTitle.text().trim()
+    jobTitle = $jobTitle.text().trim()
     companyName = $companyName.text().trim()
-    location = $companyLocation.text().trim()
+    companyLocation = $companyLocation.text().trim()
     jobDescription = $jobDescription.html().trim()
 
     let job = {};
+    job = {
+        jobTitle,
+        companyName,
+        companyLocation,
+        status: "Saved",
+        dateApplied: new Date(Date.now()).toDateString(),
+        jobDescription,
+    }
+
+    addNewJob(job)
 
     chrome.storage.local.get({lastId: 0}, function(data){
-        job = {
-            lastId: data.lastId,
-            jobTitle,
-            companyName,
-            companyLocation,
-            "status": "Saved",
-            "dateApplied": new Date(Date.now()).toDateString(),
-            jobDescription,
-        }
+        job['lastId'] = data.lastId
         chrome.storage.local.set({
             lastId: data.lastId + 1
         })
