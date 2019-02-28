@@ -1,12 +1,3 @@
-var config = {
-    apiKey: "AIzaSyDqHpPH0UkhCtQwY3uOk4dfJEmLS0ehDOc",
-    authDomain: "job-buddy-1.firebaseapp.com",
-    databaseURL: "https://job-buddy-1.firebaseio.com",
-    projectId: "job-buddy-1",
-    storageBucket: "job-buddy-1.appspot.com",
-    messagingSenderId: "1065356240334"
-  };
-firebase.initializeApp(config);
 var database = firebase.database();
 
 const COMPANIES_URL = 'https://job-buddy-1.firebaseio.com/companies'
