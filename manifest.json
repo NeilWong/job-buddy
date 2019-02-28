@@ -18,5 +18,6 @@
       "matches": [ "http://*/*", "https://*/*"]
     }],
     "web_accessible_resources": ["images/icon.png", "images/icon-full.png"],
-    "permissions": ["storage"]
+    "permissions": ["storage"],
+    "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://code.jquery.com https://cdnjs.cloudflare.com https://stackpath.bootstrapcdn.com; object-src 'self'"
 }
