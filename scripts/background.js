@@ -7,7 +7,7 @@ var config = {
     messagingSenderId: "1065356240334"
 };
 firebase.initializeApp(config);
-var database = firebase.database();
+var database = firebase.firestore();
 
 const COMPANIES_URL = 'https://job-buddy-1.firebaseio.com/companies'
 const JOBS_URL = 'https://job-buddy-1.firebaseio.com/jobs'
@@ -35,7 +35,6 @@ function googleSignIn() {
 
 function addNewJob(job) {
     var companyId = job.companyName.replace(/\s+/g, '').toLowerCase(); // get the companyId
-    var newJobId = database.ref().child('jobs').push().key; // generate a new jobId
 
     //need to add in check to see if company already exists
 
@@ -53,13 +52,10 @@ function addNewJob(job) {
 
     var newCompany = {
         name: job.companyName,
+
     }
-
-    var updates = {};
-    updates['/jobs/' + newJobId] = newJob
-    updates['/companies/' + companyId] = newCompany
-
-    return database.ref().update(updates)
+    database.collection("companies").doc(companyId).set(newCompany)
+    database.collection("jobs").add(newJob)
 }
 
 // addNewJob({companyName: 'Google Chrome', jobTitle: 'Software Developer', companyLocation: 'California', dateCreated: new Date().toDateString(), dateApplied: new Date().toDateString(), status: 'applied'})

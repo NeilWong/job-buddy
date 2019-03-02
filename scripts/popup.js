@@ -1,3 +1,14 @@
+var config = {
+  apiKey: "AIzaSyDqHpPH0UkhCtQwY3uOk4dfJEmLS0ehDOc",
+  authDomain: "job-buddy-1.firebaseapp.com",
+  databaseURL: "https://job-buddy-1.firebaseio.com",
+  projectId: "job-buddy-1",
+  storageBucket: "job-buddy-1.appspot.com",
+  messagingSenderId: "1065356240334"
+};
+firebase.initializeApp(config);
+var database = firebase.firestore();
+
 $(document).on("click", "#viewSheets", function() {
   window.open(chrome.extension.getURL('savedJobs.html'), '_blank');
 });
@@ -8,6 +19,12 @@ $(document).ready(function() {
     // load settings
 
   } else if (document.location.pathname.match(/[^\/]+$/)[0] == 'savedJobs.html') {
+
+    var jobRef = database.collection("jobs").doc("-LZz9xloODphFDp35J2N")
+
+    jobRef.get().then(function(doc) {
+      console.log(doc.data())
+    })
 
     chrome.storage.local.get({jobs: []}, function(data) {
       for (var i = 0; i < data.jobs.length; i++) {
