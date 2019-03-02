@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 var config = {
     apiKey: "AIzaSyDqHpPH0UkhCtQwY3uOk4dfJEmLS0ehDOc",
     authDomain: "job-buddy-1.firebaseapp.com",
@@ -9,9 +8,6 @@ var config = {
 };
 firebase.initializeApp(config);
 var database = firebase.firestore();
-=======
-var database = firebase.database();
->>>>>>> 76e10649f945d638ddca5c4cfd6dca9856388710
 
 const COMPANIES_URL = 'https://job-buddy-1.firebaseio.com/companies'
 const JOBS_URL = 'https://job-buddy-1.firebaseio.com/jobs'
@@ -62,17 +58,4 @@ function addNewJob(job) {
     database.collection("jobs").add(newJob)
 }
 
-<<<<<<< HEAD
 // addNewJob({companyName: 'Google Chrome', jobTitle: 'Software Developer', companyLocation: 'California', dateCreated: new Date().toDateString(), dateApplied: new Date().toDateString(), status: 'applied'})
-=======
-function update(array, job) {
-    array.push(job);
-    chrome.storage.local.set({
-        jobs: array
-    }, function() {
-        chrome.storage.local.get(['jobs'], function(data) {
-            console.log(data.jobs);
-        })
-    });
-}
->>>>>>> 76e10649f945d638ddca5c4cfd6dca9856388710
