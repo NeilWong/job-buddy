@@ -33,29 +33,30 @@ function googleSignIn() {
       });
 }
 
-function addNewJob(job) {
+async function addNewJob(job) {
     var companyId = job.companyName.replace(/\s+/g, '').toLowerCase(); // get the companyId
-
-    //need to add in check to see if company already exists
-
-    var newJob = {
-        companyId,
-        website: 'LinkedIn',
-        title: job.jobTitle,
-        location: job.companyLocation,
-        // url
-        dateCreated: job.dateApplied, // change to dateCreated
-        lastUpdated: job.dateApplied, // change to lastUpdated
-        status: job.status,
-        // description
-    }
-
-    var newCompany = {
-        name: job.companyName,
-
-    }
-    database.collection("companies").doc(companyId).set(newCompany)
-    database.collection("jobs").add(newJob)
+    await database.collection("jobs").where("companyId", "==", companyId).where("title", "==", job.jobTitle).where("location", "==", job.companyLocation).get().then(
+        function(querySnapshot) {
+            if (querySnapshot.docs.length == 0) {
+                var newJob = {
+                    companyId,
+                    website: 'LinkedIn',
+                    title: job.jobTitle,
+                    location: job.companyLocation,
+                    // url
+                    dateCreated: job.dateApplied, // change to dateCreated
+                    lastUpdated: job.dateApplied, // change to lastUpdated
+                    status: job.status,
+                    // description
+                }
+                var newCompany = {
+                    name: job.companyName,
+                }
+                database.collection("companies").doc(companyId).set(newCompany)
+                database.collection("jobs").add(newJob)
+            }
+        }
+    )
 }
 
-// addNewJob({companyName: 'Google Chrome', jobTitle: 'Software Developer', companyLocation: 'California', dateCreated: new Date().toDateString(), dateApplied: new Date().toDateString(), status: 'applied'})
+addNewJob({companyName: 'Google', jobTitle: 'Software Engineer', companyLocation: 'California', dateCreated: new Date().toDateString(), dateApplied: new Date().toDateString(), status: 'applied'})
